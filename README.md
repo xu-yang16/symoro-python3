@@ -11,20 +11,24 @@ For details on the algorithms used, please see [the paper][lk:hal]
 published in the AIM 2014 conference.
 
 
-Requirements
+Requirements (tested on Win10 and anaconda successfully)
 ------------
-+ python (>= 2.7 or >= 3.4)
++ python (==3.8.13)
 + sympy (== 0.7.3)
 + numpy (>= 1.6.1)
 + wxPython (>= 2.8.12)
 + PyOpenGL (>= 3.0.1b2)
-+ ConfigParser for the Python3 version (tested with 3.5.0)
 
 
 Getting Started
 ---------------
-+ For setting up SYMORO, see [Setup][lk:setup].
-+ If you have any queries, contact [Aravind][el:aravind].
+```bash
+pip uninstall symoro -y
+git clone https://github.com/xu-yang16/symoro-python3.git
+cd symoro-python3
+python setup.py develop
+python bin/symoro-bin.py
+```
 
 
 Licence

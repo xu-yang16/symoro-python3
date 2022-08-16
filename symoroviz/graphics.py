@@ -14,6 +14,7 @@ from wx.glcanvas import GLCanvas, GLContext
 import OpenGL.GL as gl
 import OpenGL.GLU as glu
 
+import numpy as np
 from numpy import sin, cos, radians, pi, inf, nan
 
 from sympy import Expr
@@ -153,7 +154,10 @@ class VizGlCanvas(GLCanvas):
         event.Skip()
 
     def OnMouseDown(self, evt):
-        self.CaptureMouse()
+        try:
+            self.CaptureMouse()
+        except wx._core.PyAssertionError:
+            pass
         self.lastx, self.lasty = evt.GetPosition()
 
     def OnMouseUp(self, _):
@@ -603,7 +607,17 @@ class MainWindow(wx.Frame):
         self.canvas.OnDraw()
 
     def OnFindRandom(self, evt):
-        pass
+        robo = self.robo
+        for i in range(1, robo.nj):
+            sym = robo.get_q(i)
+            if robo.sigma[i] == 0:
+                self.canvas.jnt_dict[sym].q = np.random.rand()*6 - 3
+            elif robo.sigma[i] == 1:
+                self.canvas.jnt_dict[sym].q = np.random.rand() + 0.5
+        if self.solve_loops:
+            self.canvas.solve()
+        self.update_spin_controls()
+        self.canvas.OnDraw()
 
     def OnHomePosition(self, evt):
         self.canvas.centralize_to_frame(0)

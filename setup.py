@@ -26,17 +26,17 @@ bin_scripts = [apply_folder_join(x) for x in bin_scripts]
 
 setup(
     name='symoro',
-    version='0.2',
+    version='mine',
     description='SYmoblic MOdelling of RObots software package',
-    url='http://github.com/symoro/symoro',
+    url='https://github.com/xu-yang16/symoro-python3',
     license='MIT',
     scripts=bin_scripts,
     packages=find_packages(exclude=['*.tests', '*.tests.*', 'tests.*', 'tests']),
     install_requires=[
-        'sympy>=0.7.3',
-        'numpy>=1.6.1',
+        'sympy==1.11rc1',
+        'numpy==1.23.2',
         'wxPython==4.0.7',
-        'PyOpenGL>=3.0.1b2'
+        'PyOpenGL==3.1.6'
     ],
     zip_safe=False
 )
