@@ -9,6 +9,7 @@ from itertools import product
 
 from numpy import sin, cos, pi
 
+import ctypes
 
 def create_cyl_array(radius, length, n_segments, centered=True):
     vertices, indices, normals = [], [], []
@@ -51,7 +52,7 @@ def create_sphere_array(radius, n_lat, n_long):
             normals += xn, yn, zn
             vertices += (x, y, z)
     # top and bottom indices
-    for i, start in enumerate([2, len(vertices)/3 - n_long]):
+    for i, start in enumerate([2, int(len(vertices)/3) - n_long]):
         for j in range(n_long):
             indices += (i, j + start, (j + 1) % n_long + start)
     # in-between

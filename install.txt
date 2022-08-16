@@ -1,0 +1,5 @@
+pip uninstall symoro -y
+
+python setup.py develop
+
+python bin/symoro-bin.py

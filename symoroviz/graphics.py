@@ -9,7 +9,7 @@ from math import atan2
 
 import wx
 import wx.lib.agw.floatspin as FS
-from wx.glcanvas import GLCanvas
+from wx.glcanvas import GLCanvas, GLContext
 
 import OpenGL.GL as gl
 import OpenGL.GLU as glu
@@ -34,6 +34,7 @@ from symoroviz.objects import PrismaticJoint
 #TODO: Random button
 
 class VizGlCanvas(GLCanvas):
+
     def __init__(self, parent, robo, params, size=(600, 600)):
         super(VizGlCanvas, self).__init__(parent, size=size)
         self.Bind(wx.EVT_PAINT, self.OnPaintAll)
@@ -59,6 +60,8 @@ class VizGlCanvas(GLCanvas):
         self.construct_hierarchy()
         self.dgms = {}
         self.l_solver = None
+        self._glContext = GLContext(self)
+
 
     def OnEraseBackground(self, event):
         # Do nothing, to avoid flashing on MSW.
@@ -140,8 +143,8 @@ class VizGlCanvas(GLCanvas):
 
     def OnSize(self, event):
         size = self.size = self.GetClientSize()
-        if self.GetContext():
-            self.SetCurrent()
+        if self._glContext:
+            self._glContext.SetCurrent(self)
             gl.glViewport(0, 0, size.width, size.height)
             #gl.glMatrixMode(gl.GL_PROJECTION)
             #gl.glLoadIdentity()
@@ -244,7 +247,7 @@ class VizGlCanvas(GLCanvas):
         self.Refresh(False)
 
     def OnPaintAll(self, event):
-        self.SetCurrent()
+        self._glContext.SetCurrent(self)
         if not self.init:
             self.InitGL()
             self.init = 1
@@ -469,7 +472,7 @@ class MainWindow(wx.Frame):
             choices.append("Frame " + str(jnt.index))
         self.drag_pos = None
         self.clb_frames = wx.CheckListBox(self.p, choices=choices)
-        self.clb_frames.SetChecked(range(len(choices)))
+        self.clb_frames.SetCheckedItems(range(len(choices)))
         self.clb_frames.Bind(wx.EVT_CHECKLISTBOX, self.CheckFrames)
         self.clb_frames.Bind(wx.EVT_LISTBOX, self.SelectFrames)
         grd_szr_control.Add(
@@ -573,7 +576,7 @@ class MainWindow(wx.Frame):
         else:
             indices = []
         self.canvas.show_frames(indices)
-        self.clb_frames.SetChecked(indices)
+        self.clb_frames.SetCheckedItems(indices)
 
     def update_spin_controls(self):
         for ctrl in self.spin_ctrls.values():
@@ -621,9 +624,9 @@ class MainWindow(wx.Frame):
         self.canvas.OnDraw()
 
     def CheckFrames(self, evt):
-        self.canvas.show_frames(evt.EventObject.GetChecked())
+        self.canvas.show_frames(evt.EventObject.GetCheckedItems())
         self.tgl_btn_frames.Value = False
-        evt.EventObject.DeselectAll()
+        # evt.EventObject.DeselectAll()
 
     def SelectFrames(self, evt):
         selections = evt.EventObject.GetSelections()

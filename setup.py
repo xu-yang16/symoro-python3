@@ -18,12 +18,11 @@ def apply_folder_join(item):
     return os.path.join(BIN_FOLDER, item)
 
 
-if os.name is 'nt':
+if os.name == 'nt':
     bin_scripts = ['symoro-bin.py']
 else:
     bin_scripts = ['symoro-bin']
-bin_scripts = map(apply_folder_join, bin_scripts)
-
+bin_scripts = [apply_folder_join(x) for x in bin_scripts]
 
 setup(
     name='symoro',
@@ -34,13 +33,10 @@ setup(
     scripts=bin_scripts,
     packages=find_packages(exclude=['*.tests', '*.tests.*', 'tests.*', 'tests']),
     install_requires=[
-        'sympy==0.7.3',
+        'sympy>=0.7.3',
         'numpy>=1.6.1',
-        'wxPython>=2.8.11',
+        'wxPython==4.0.7',
         'PyOpenGL>=3.0.1b2'
-    ],
-    dependency_links=[
-        'https://github.com/sympy/sympy/archive/sympy-0.7.3.zip'
     ],
     zip_safe=False
 )
