@@ -153,7 +153,7 @@ IDEN_MENU = OrderedDict([
 DYN_MENU = OrderedDict([
     ('m_idym', 'Inverse Dynamic Model'),
     ('m_inertia_matrix', 'Inertia matrix'),
-    ('m_h_term', 'Centrifugal, Coriolis & Gravity torques'),
+    ('m_h_term', 'Centrifugal, Coriolis and Gravity torques'),
     ('m_ddym', 'Direct Dynamic Model'),
 ])
 KIN_MENU = OrderedDict([
