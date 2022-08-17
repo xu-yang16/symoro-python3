@@ -37,7 +37,7 @@ python bin/symoro-bin.py
 
 Getting Started
 ---------------
-* [A simple introduction in Chinese](https://www.zhihu.com/collection/825441151)
+* [A simple introduction in Chinese](https://zhuanlan.zhihu.com/p/447348147)
 * The paper [SYMORO+: A SYSTEM FOR THE SYMBOLIC MODELLING OF ROBOTS](https://hal.archives-ouvertes.fr/hal-00401687/document)
 * The book [Modeling Identification and Control of Robots](http://home.elka.pw.edu.pl/~ptrojane/books/Modeling,%20Identification%20and%20Control%20of%20Robots.pdf)
 * A few notes by me:
