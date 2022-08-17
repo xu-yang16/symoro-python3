@@ -113,7 +113,7 @@ def compute_lambda(robo, symo, j, antRj, antPj, lam):
 
     Notes
     =====
-    lam is the output paramete
+    lam is the output parameter
     """
     lamJJ_list = []
     lamJMS_list = []
@@ -142,7 +142,7 @@ def group_param_rot(robo, symo, j, lam):
 
     Notes
     =====
-    robo is the output paramete
+    robo is the output parameter
     """
     Kj = robo.get_inert_param(j)
 
@@ -167,7 +167,7 @@ def group_param_rot_spec(robo, symo, j, lam, antRj, antPj):
 
     Notes
     =====
-    robo is the output paramete
+    robo is the output parameter
     """
     chainj = robo.chain(j)
     r1, r2, orthog = Transform.find_r12(robo, chainj, antRj, j)
@@ -204,7 +204,7 @@ def group_param_fix(robo, symo, j, lam):
 
     Notes
     =====
-    robo is the output paramete
+    robo is the output parameter
     """
     Kj = robo.get_inert_param(j)
     for i in range(10):
@@ -222,7 +222,7 @@ def group_param_prism(robo, symo, j, antRj):
 
     Notes
     =====
-    robo is the output paramete
+    robo is the output parameter
     """
     Kj = robo.get_inert_param(j)
     for i in range(6):
@@ -240,7 +240,7 @@ def group_param_prism_spec(robo, symo, j, antRj, antPj):
 
     Notes
     =====
-    robo is the output paramete
+    robo is the output parameter
     """
     chainj = robo.chain(j)
     r1, r2, orthog = Transform.find_r12(robo, chainj, antRj, j)

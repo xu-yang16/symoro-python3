@@ -121,7 +121,7 @@ def _jac(robo, symo, n, i, j, chain=None, forced=False, trig_subs=False):
     iRj = Transform.R(iTk_dict[i, j])
     jTn = dgm(robo, symo, j, n, fast_form=False, trig_subs=trig_subs)
     jPn = Transform.P(jTn)
-    L = -tools.skew(iRj*jPn)
+    L = tools.skew(iRj*jPn) # origin of frame j relative to global frame
     L = L.applyfunc(trigsimp)
     if forced:
         symo.mat_replace(Jac, 'J', '', forced)

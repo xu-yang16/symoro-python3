@@ -91,14 +91,15 @@ class MainFrame(wx.Frame):
         Returns:
             An instance of `Robot` class.
         """
-        par_file_path = configfile.get_last_robot()
+        # par_file_path = configfile.get_last_robot()
+        par_file_path = None
         if par_file_path is None:
             # when last used robot was not saved
-            return samplerobots.rx90()
+            return samplerobots.double_link()
         elif not os.path.exists(par_file_path):
             # when the PAR file does not exist
             self.message_error("The PAR file does not exist.")
-            return samplerobots.rx90()
+            return samplerobots.double_link()
         else:
             robo_name = os.path.split(par_file_path)[1][:-4]
             robo, flag = parfile.readpar(robo_name, par_file_path)
@@ -960,7 +961,6 @@ class MainFrame(wx.Frame):
             # when OK button and user input isn't an empty string
             # save as new robot
             self.robo.name = str(txtdlg.GetValue()).strip()
-            print("name=", self.robo.name)
             self.robo.set_directory()
             self.robo.set_par_file_path()
             parfile.writepar(self.robo)
@@ -1059,7 +1059,8 @@ class MainFrame(wx.Frame):
             n, i, j = dialog.get_values()
             model_symo = kinematics.jacobian(self.robo, n, i, j)
             out_file_path = self.prompt_file_save(model_symo)
-            self.model_success(out_file_path)
+            if out_file_path != False:
+                self.model_success(out_file_path)
         dialog.Destroy()
 
     def OnDeterminant(self, event):
@@ -1071,7 +1072,8 @@ class MainFrame(wx.Frame):
                 self.robo, *dialog.get_values()
             )
             out_file_path = self.prompt_file_save(model_symo)
-            self.model_success(out_file_path)
+            if out_file_path != False:
+                self.model_success(out_file_path)
         dialog.Destroy()
 
     def OnCkel(self, event):
@@ -1080,22 +1082,26 @@ class MainFrame(wx.Frame):
             self.message_warning("There are no loops")
         else:
             out_file_path = self.prompt_file_save(model_symo)
-            self.model_success(out_file_path)
+            if out_file_path != False:
+                self.model_success(out_file_path)
 
     def OnVelocities(self, event):
         model_symo = kinematics.velocities(self.robo)
         out_file_path = self.prompt_file_save(model_symo)
-        self.model_success(out_file_path)
+        if out_file_path != False:
+            self.model_success(out_file_path)
 
     def OnAccelerations(self, event):
         model_symo = kinematics.accelerations(self.robo)
         out_file_path = self.prompt_file_save(model_symo)
-        self.model_success(out_file_path)
+        if out_file_path != False:
+            self.model_success(out_file_path)
 
     def OnJpqp(self, event):
         model_symo = kinematics.jdot_qdot(self.robo)
         out_file_path = self.prompt_file_save(model_symo)
-        self.model_success(out_file_path)
+        if out_file_path != False:
+            self.model_success(out_file_path)
 
     def OnInverseDynamic(self, event):
         model_symo = self.robo.compute_idym()

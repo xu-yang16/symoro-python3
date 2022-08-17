@@ -156,3 +156,47 @@ def rx90():
     ]
     robo.G = Matrix([0, 0, var('G3')])
     return robo
+
+
+def double_link():
+    """Generate Robot instance of double link"""
+    robo = Robot('double_link', 2, 2, 2, False)
+    num = 3
+    robo.structure = tools.SIMPLE
+    # table of geometric parameters for double link
+    robo.sigma = [2, 0, 0]
+    robo.mu = [0, 1, 1]
+
+    robo.gamma = [0, 0, 0]
+    robo.b = [0, 0, 0]
+
+    robo.alpha = [0, -pi/2, 0]
+    robo.d = [0, 0, var("L1")]
+
+    robo.theta = [0, var('q1'), var('q2')]
+    robo.r = [0, 0, 0]
+    
+    robo.w0 = zeros(3, 1)
+    robo.wdot0 = zeros(3, 1)
+    robo.v0 = zeros(3, 1)
+    robo.vdot0 = zeros(3, 1)
+    
+    robo.qdot = [var('dq{0}'.format(i)) for i in [0, 1, 2]]
+    robo.qddot = [var('ddq{0}'.format(i)) for i in [0, 1, 2]]
+    robo.Nex= [zeros(3, 1)] * num
+    robo.Fex = [zeros(3, 1)] * num
+    robo.FS = [var('F{0}s'.format(i)) for i in [0, 1, 2]]
+    robo.IA = [0] * num
+    robo.FV = [var('F{0}v'.format(i)) for i in [0, 1, 2]]
+    robo.MS = [Matrix(var('m{0}*c{0}x, 0, 0'.format(i))) for i in [0, 1, 2]]
+    robo.M = [var('m{0}'.format(i)) for i in [0, 1, 2]]
+    robo.GAM = [0] * num
+    inertia_matrix_terms = ("I{0}xx, I{0}xy, I{0}xz, ") + \
+        ("I{0}xy, I{0}yy, I{0}yz, ") + \
+        ("I{0}xz, I{0}yz, I{0}zz")
+    robo.J = [
+        Matrix(3, 3, var(inertia_matrix_terms.format(i))) \
+        for i in [0, 1, 2]
+    ]
+    robo.G = Matrix([0, 0, var('g')])
+    return robo
