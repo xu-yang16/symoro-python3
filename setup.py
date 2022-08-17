@@ -26,7 +26,7 @@ bin_scripts = [apply_folder_join(x) for x in bin_scripts]
 
 setup(
     name='symoro',
-    version='mine',
+    version='yx',
     description='SYmoblic MOdelling of RObots software package',
     url='https://github.com/xu-yang16/symoro-python3',
     license='MIT',
