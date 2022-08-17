@@ -41,7 +41,7 @@ Getting Started
 * The paper [SYMORO+: A SYSTEM FOR THE SYMBOLIC MODELLING OF ROBOTS](https://hal.archives-ouvertes.fr/hal-00401687/document)
 * The book [Modeling Identification and Control of Robots](http://home.elka.pw.edu.pl/~ptrojane/books/Modeling,%20Identification%20and%20Control%20of%20Robots.pdf)
 * A few notes by me:
-  * **Attention**: the box `MX`, `MY` and `MZ` should be something like $m_1c_{1x}, m_1c_{2x}$ and $m_1c_{3x}$ instead of the postion of CoM.
+  * **Attention**: the box `MX`, `MY` and `MZ` should be something like $m_1c_{1x}, m_1c_{1y}$ and $m_1c_{1z}$ instead of the postion of CoM.
   * **Kinematic - Jacobian matrix**: the generated file includes the Jacobian matrix $J$ and the position vector connecting the origin of frame i to that of frame j $L$.
   * **Dynamic - Inverse Dynamic Model**: the generate file is in the following form
     $$
