@@ -19,9 +19,9 @@ Requirements (tested with Win10 and anaconda successfully)
 ------------
 + python (== 3.8.13)
 + sympy (== 1.11rc1)
-+ numpy (>= 1.23.2)
-+ wxPython (>= 4.0.7)
-+ PyOpenGL (>= 3.1.6)
++ numpy (== 1.23.2)
++ wxPython (== 4.0.7)
++ PyOpenGL (== 3.1.6)
 
 
 Setup
